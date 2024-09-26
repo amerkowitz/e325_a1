@@ -22,6 +22,17 @@ streamH$dateF <- ymd_hm(streamH$datetime,
                         tz="America/New_York")
 year(streamH$dateF)
 
+example <- floods %>%
+  filter(gheight.ft >= 10)
+plot(peace$dateF, peace$gheight.ft, type="l")
+
+
+max.ht <- floods  %>%
+  group_by(names) %>%
+  summarise(max_ht_ft=max(gheight.ft, na.rm=TRUE),
+            mean_ft = mean(gheight.ft, na.rm=TRUE))
+
+
 # Prompt 3
 
 flood_date <- floods %>%
@@ -85,3 +96,4 @@ floods$diff <- floods$gheight.ft-floods$major.ft
 floods$gheight.ft-floods$major.ft
 max(floods$diff)
 which(floods$diff > 7.84)
+
