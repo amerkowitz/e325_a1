@@ -18,15 +18,9 @@ floods <- full_join(streamH, siteinfo, by = "siteID")
 peace <- floods %>%
   filter(siteID == 2295637)
 # Prompt 2
-example <- floods %>%
-  filter(gheight.ft >= 10)
-plot(peace$dateF, peace$gheight.ft, type="l")
-
-
-max.ht <- floods  %>%
-  group_by(names) %>%
-  summarise(max_ht_ft=max(gheight.ft, na.rm=TRUE),
-            mean_ft = mean(gheight.ft, na.rm=TRUE))
+streamH$dateF <- ymd_hm(streamH$datetime,
+                        tz="America/New_York")
+year(streamH$dateF)
 
 # Prompt 3
 
@@ -50,7 +44,7 @@ plot(fishH$dateF, fishH$gheight.ft, type="b", pch=19, xlab="Date",
 santafeH <- streamH[streamH$siteID == 2322500, ]
 plot(santafeH$dateF, santafeH$gheight.ft, type="b", pch=19, xlab="Date",
      ylab = "Stage height (ft)")
-withH <- streamH[streamH$siteID == 2322500, ]
+withH <- streamH[streamH$siteID == 2312000, ]
 plot(withH$dateF, withH$gheight.ft, type="b", pch=19, xlab="Date",
      ylab = "Stage height (ft)")
 # Question 2
